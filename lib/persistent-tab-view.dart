@@ -6,8 +6,8 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' show CupertinoApp;
+import 'package:flutter_svg/flutter_svg.dart';
 import 'models/nested_will_pop_scope.dart';
-
 
 //Main TabView Widget
 part 'persistent-tab-view.widget.dart';
@@ -15,7 +15,7 @@ part 'persistent-tab-view.widget.dart';
 //Models
 part 'models/persistent-nav-bar-scaffold.widget.dart';
 part 'models/persistent-bottom-nav-bar.widget.dart';
-part 'models/persisten-bottom-nav-item.widget.dart';
+part 'models/persistent-bottom-nav-item.widget.dart';
 part 'models/persistent-bottom-nav-bar-styles.widget.dart';
 part 'models/neumorphic-properties.widget.dart';
 part 'models/tab-view.widget.dart';
@@ -56,3 +56,4 @@ part 'nav-bar-styles/style-17-bottom-nav-bar.widget.dart';
 part 'nav-bar-styles/style-18-bottom-nav-bar.widget.dart';
 part 'nav-bar-styles/simple-bottom-nav-bar.widget.dart';
 part 'nav-bar-styles/neumorphic-bottom-nav-bar.widget.dart';
+part 'nav-bar-styles/svg-bottom-nav-bar.widget.dart';

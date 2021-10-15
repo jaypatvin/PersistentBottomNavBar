@@ -71,20 +71,32 @@ class _BottomNavStyle14State extends State<BottomNavStyle14>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Expanded(
-                      child: IconTheme(
-                        data: IconThemeData(
-                            size: item.iconSize,
-                            color: isSelected
-                                ? (item.activeColorSecondary == null
-                                    ? item.activeColorPrimary
-                                    : item.activeColorSecondary)
-                                : item.inactiveColorPrimary == null
-                                    ? item.activeColorPrimary
-                                    : item.inactiveColorPrimary),
-                        child: isSelected
-                            ? item.icon
-                            : item.inactiveIcon ?? item.icon,
-                      ),
+                      child: item.assetName == null || item.assetName!.isEmpty
+                          ? IconTheme(
+                              data: IconThemeData(
+                                size: item.iconSize,
+                                color: isSelected
+                                    ? (item.activeColorSecondary == null
+                                        ? item.activeColorPrimary
+                                        : item.activeColorSecondary)
+                                    : item.inactiveColorPrimary == null
+                                        ? item.activeColorPrimary
+                                        : item.inactiveColorPrimary,
+                              ),
+                              child: isSelected
+                                  ? item.icon!
+                                  : item.inactiveIcon ?? item.icon!,
+                            )
+                          : SvgPicture.asset(
+                              item.assetName!,
+                              color: isSelected
+                                  ? (item.activeColorSecondary == null
+                                      ? item.activeColorPrimary
+                                      : item.activeColorSecondary)
+                                  : item.inactiveColorPrimary == null
+                                      ? item.activeColorPrimary
+                                      : item.inactiveColorPrimary,
+                            ),
                     ),
                     item.title == null
                         ? SizedBox.shrink()

@@ -288,6 +288,10 @@ class PersistentBottomNavBar extends StatelessWidget {
             navBarEssentials: this.navBarEssentials,
             neumorphicProperties: this.neumorphicProperties,
           );
+        case NavBarStyle.svg:
+          return SvgNavStyle(
+            navBarEssentials: this.navBarEssentials,
+          );
         default:
           return BottomNavSimple(
             navBarEssentials: this.navBarEssentials,

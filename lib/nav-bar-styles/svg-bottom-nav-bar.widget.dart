@@ -1,18 +1,18 @@
 part of persistent_bottom_nav_bar;
 
-class BottomNavStyle8 extends StatefulWidget {
+class SvgNavStyle extends StatefulWidget {
   final NavBarEssentials? navBarEssentials;
 
-  BottomNavStyle8({
+  const SvgNavStyle({
     Key? key,
     this.navBarEssentials = const NavBarEssentials(items: null),
   });
 
   @override
-  _BottomNavStyle8State createState() => _BottomNavStyle8State();
+  _SvgNavStyleState createState() => _SvgNavStyleState();
 }
 
-class _BottomNavStyle8State extends State<BottomNavStyle8>
+class _SvgNavStyleState extends State<SvgNavStyle>
     with TickerProviderStateMixin {
   late List<AnimationController> _animationControllerList;
   late List<Animation<double>> _animationList;
@@ -34,7 +34,7 @@ class _BottomNavStyle8State extends State<BottomNavStyle8>
               widget.navBarEssentials!.itemAnimationProperties?.duration ??
                   Duration(milliseconds: 400),
           vsync: this));
-      _animationList.add(Tween(begin: 0.95, end: 1.2)
+      _animationList.add(Tween(begin: 0.95, end: 1.18)
           .chain(CurveTween(
               curve: widget.navBarEssentials!.itemAnimationProperties?.curve ??
                   Curves.ease))
@@ -47,84 +47,50 @@ class _BottomNavStyle8State extends State<BottomNavStyle8>
   }
 
   Widget _buildItem(PersistentBottomNavBarItem item, bool isSelected,
-      double? height, int itemIndex) {
-    return widget.navBarEssentials!.navBarHeight == 0
-        ? SizedBox.shrink()
-        : Container(
-            alignment: Alignment.center,
-            height: height,
-            width: double.maxFinite,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: item.assetName == null || item.assetName!.isEmpty
-                      ? IconTheme(
-                          data: IconThemeData(
-                            size: item.iconSize,
-                            color: isSelected
-                                ? (item.activeColorSecondary == null
-                                    ? item.activeColorPrimary
-                                    : item.activeColorSecondary)
-                                : item.inactiveColorPrimary == null
-                                    ? item.activeColorPrimary
-                                    : item.inactiveColorPrimary,
-                          ),
-                          child: isSelected
-                              ? item.icon!
-                              : item.inactiveIcon ?? item.icon!,
-                        )
-                      : SvgPicture.asset(
-                          item.assetName!,
-                          color: isSelected
-                              ? (item.activeColorSecondary == null
-                                  ? item.activeColorPrimary
-                                  : item.activeColorSecondary)
-                              : item.inactiveColorPrimary == null
-                                  ? item.activeColorPrimary
-                                  : item.inactiveColorPrimary,
-                        ),
-                ),
-                item.title == null
-                    ? SizedBox.shrink()
-                    : AnimatedBuilder(
-                        animation: _animationList[itemIndex],
-                        builder: (context, child) => Transform.scale(
-                          scale: _animationList[itemIndex].value,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 15.0),
-                            child: Material(
-                              type: MaterialType.transparency,
-                              child: FittedBox(
-                                child: Text(
-                                  item.title!,
-                                  style: item.textStyle != null
-                                      ? (item.textStyle!.apply(
-                                          color: isSelected
-                                              ? (item.activeColorSecondary ==
-                                                      null
-                                                  ? item.activeColorPrimary
-                                                  : item.activeColorSecondary)
-                                              : item.inactiveColorPrimary))
-                                      : TextStyle(
-                                          color: isSelected
-                                              ? (item.activeColorSecondary ==
-                                                      null
-                                                  ? item.activeColorPrimary
-                                                  : item.activeColorSecondary)
-                                              : item.inactiveColorPrimary,
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 12.0),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-              ],
+      double height, int itemIndex) {
+    return Container(
+      alignment: Alignment.center,
+      height: height,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Flexible(
+            child: SvgPicture.asset(
+              item.assetName!,
+              color: isSelected
+                  ? (item.activeColorSecondary == null
+                      ? item.activeColorPrimary
+                      : item.activeColorSecondary)
+                  : item.inactiveColorPrimary == null
+                      ? item.activeColorPrimary
+                      : item.inactiveColorPrimary,
             ),
-          );
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 5.0),
+            child: Material(
+              type: MaterialType.transparency,
+              child: FittedBox(
+                child: Text(
+                  item.title!,
+                  style: TextStyle(
+                    color: isSelected
+                        ? (item.activeColorSecondary == null
+                            ? item.activeColorPrimary
+                            : item.activeColorSecondary)
+                        : item.inactiveColorPrimary,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12.0,
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -201,7 +167,7 @@ class _BottomNavStyle8State extends State<BottomNavStyle8>
                 child: _buildItem(
                     item,
                     widget.navBarEssentials!.selectedIndex == index,
-                    widget.navBarEssentials!.navBarHeight,
+                    widget.navBarEssentials!.navBarHeight!,
                     index),
               ),
             ),

@@ -2,8 +2,11 @@ part of persistent_bottom_nav_bar;
 
 ///An item widget for the `PersistentTabView`.
 class PersistentBottomNavBarItem {
+  ///String for svg assetPath. Overrides icon.
+  final String? assetName;
+
   ///Icon for the bar item.
-  final Widget icon;
+  final Widget? icon;
 
   ///In-Active icon for the bar item.
   final Widget? inactiveIcon;
@@ -55,22 +58,25 @@ class PersistentBottomNavBarItem {
 
   final RouteAndNavigatorSettings routeAndNavigatorSettings;
 
-  PersistentBottomNavBarItem(
-      {required this.icon,
-      this.inactiveIcon,
-      this.title,
-      this.contentPadding = 5.0,
-      this.activeColorPrimary = CupertinoColors.activeBlue,
-      this.activeColorSecondary,
-      this.inactiveColorPrimary,
-      this.inactiveColorSecondary = CupertinoColors.systemGrey,
-      this.opacity = 1.0,
-      this.filter,
-      this.textStyle,
-      this.iconSize = 26.0,
-      this.onSelectedTabPressWhenNoScreensPushed,
-      this.routeAndNavigatorSettings = const RouteAndNavigatorSettings(),
-      this.onPressed}) {
+  PersistentBottomNavBarItem({
+    this.assetName,
+    this.icon,
+    this.inactiveIcon,
+    this.title,
+    this.contentPadding = 5.0,
+    this.activeColorPrimary = CupertinoColors.activeBlue,
+    this.activeColorSecondary,
+    this.inactiveColorPrimary,
+    this.inactiveColorSecondary = CupertinoColors.systemGrey,
+    this.opacity = 1.0,
+    this.filter,
+    this.textStyle,
+    this.iconSize = 26.0,
+    this.onSelectedTabPressWhenNoScreensPushed,
+    this.routeAndNavigatorSettings = const RouteAndNavigatorSettings(),
+    this.onPressed,
+  }) {
+    assert((assetName != null && assetName!.isNotEmpty) || icon != null);
     assert(opacity >= 0 && opacity <= 1.0);
   }
 }
