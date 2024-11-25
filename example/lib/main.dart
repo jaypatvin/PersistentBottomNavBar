@@ -7,7 +7,7 @@ import 'screens.dart';
 
 void main() => runApp(MyApp());
 
-BuildContext testContext;
+BuildContext? testContext;
 
 class MyApp extends StatelessWidget {
   @override
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MainMenu extends StatefulWidget {
-  MainMenu({Key key}) : super(key: key);
+  MainMenu({final Key? key}) : super(key: key);
 
   @override
   _MainMenuState createState() => _MainMenuState();
@@ -79,15 +79,18 @@ class _MainMenuState extends State<MainMenu> {
 
 class ProvidedStylesExample extends StatefulWidget {
   final BuildContext menuScreenContext;
-  ProvidedStylesExample({Key key, this.menuScreenContext}) : super(key: key);
+  ProvidedStylesExample({
+    required this.menuScreenContext,
+    final Key? key,
+  }) : super(key: key);
 
   @override
   _ProvidedStylesExampleState createState() => _ProvidedStylesExampleState();
 }
 
 class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
-  PersistentTabController _controller;
-  bool _hideNavBar;
+  late PersistentTabController _controller;
+  late bool _hideNavBar;
 
   @override
   void initState() {
@@ -181,8 +184,8 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
               '/second': (context) => MainScreen3(),
             },
           ),
-          onPressed: (context) {
-            pushDynamicScreen(context,
+          onPressed: (ctx) {
+            pushDynamicScreen(ctx ?? context,
                 screen: SampleModalScreen(), withNavBar: true);
           }),
       PersistentBottomNavBarItem(
@@ -245,9 +248,9 @@ class _ProvidedStylesExampleState extends State<ProvidedStylesExample> {
         margin: EdgeInsets.all(0.0),
         popActionScreens: PopActionScreensType.all,
         bottomScreenMargin: 0.0,
-        onWillPop: (context) async {
+        onWillPop: (ctx) async {
           await showDialog(
-            context: context,
+            context: ctx ?? context,
             useSafeArea: true,
             builder: (context) => Container(
               height: 50.0,
@@ -295,10 +298,10 @@ class CustomNavBarWidget extends StatelessWidget {
   final ValueChanged<int> onItemSelected;
 
   CustomNavBarWidget({
-    Key key,
-    this.selectedIndex,
-    @required this.items,
-    this.onItemSelected,
+    required this.selectedIndex,
+    required this.items,
+    required this.onItemSelected,
+    final Key? key,
   });
 
   Widget _buildItem(PersistentBottomNavBarItem item, bool isSelected) {
@@ -330,7 +333,7 @@ class CustomNavBarWidget extends StatelessWidget {
               type: MaterialType.transparency,
               child: FittedBox(
                   child: Text(
-                item.title,
+                item.title ?? "",
                 style: TextStyle(
                     color: isSelected
                         ? (item.activeColorSecondary == null

@@ -17,7 +17,7 @@ Future<T?> pushNewScreen<T>(
 }
 
 Future<T?> pushDynamicScreen<T>(
-  BuildContext context, {
+  final BuildContext context, {
   required dynamic screen,
   bool? withNavBar,
 }) {

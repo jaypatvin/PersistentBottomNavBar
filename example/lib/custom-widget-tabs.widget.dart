@@ -6,15 +6,18 @@ import 'screens.dart';
 
 class CustomWidgetExample extends StatefulWidget {
   final BuildContext menuScreenContext;
-  CustomWidgetExample({Key key, this.menuScreenContext}) : super(key: key);
+  CustomWidgetExample({
+    required this.menuScreenContext,
+    final Key? key,
+  }) : super(key: key);
 
   @override
   _CustomWidgetExampleState createState() => _CustomWidgetExampleState();
 }
 
 class _CustomWidgetExampleState extends State<CustomWidgetExample> {
-  PersistentTabController _controller;
-  bool _hideNavBar;
+  late PersistentTabController _controller;
+  late bool _hideNavBar;
 
   @override
   void initState() {

@@ -6,7 +6,7 @@ class PersistentBottomNavBarItem {
   final String? assetName;
 
   ///Icon for the bar item.
-  final Widget? icon;
+  final Widget icon;
 
   ///In-Active icon for the bar item.
   final Widget? inactiveIcon;
@@ -59,8 +59,8 @@ class PersistentBottomNavBarItem {
   final RouteAndNavigatorSettings routeAndNavigatorSettings;
 
   PersistentBottomNavBarItem({
+    required this.icon,
     this.assetName,
-    this.icon,
     this.inactiveIcon,
     this.title,
     this.contentPadding = 5.0,
@@ -76,7 +76,7 @@ class PersistentBottomNavBarItem {
     this.routeAndNavigatorSettings = const RouteAndNavigatorSettings(),
     this.onPressed,
   }) {
-    assert((assetName != null && assetName!.isNotEmpty) || icon != null);
-    assert(opacity >= 0 && opacity <= 1.0);
+    assert(opacity >= 0 && opacity <= 1.0,
+        "Opacity cannot be greater than 1 and less than 0");
   }
 }
